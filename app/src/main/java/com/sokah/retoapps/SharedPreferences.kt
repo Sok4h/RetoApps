@@ -9,6 +9,7 @@ class SharedPreferences(val context: Context) {
     val db = context.getSharedPreferences("DB", Context.MODE_PRIVATE)
     val gson = Gson()
     val loggedUser ="LOGGED_USER"
+    var userCode :String? = null
 
     fun saveLoggedUser(userCode:String){
 
@@ -19,13 +20,11 @@ class SharedPreferences(val context: Context) {
 
     fun getLoggedUser(): User? {
 
-        val userCode = db.getString(loggedUser,"")
+        userCode = db.getString(loggedUser,"").toString()
         Log.e("xd", db.getString(loggedUser,"").toString() )
 
         if(userCode != null){
             val userString = db.getString(userCode,"")
-             Log.e("a", userString!! )
-            Log.e("b", userCode )
             return gson.fromJson(userString, User::class.java)
         }
 

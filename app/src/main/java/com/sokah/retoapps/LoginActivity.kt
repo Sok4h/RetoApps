@@ -20,7 +20,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.e("TAG", prefs.getLoggedUser().toString())
         if (prefs.getLoggedUser() != null) {
 
             val intent = Intent(this, MainActivity::class.java)
