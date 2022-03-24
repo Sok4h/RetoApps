@@ -30,9 +30,9 @@ class PublishFragment : Fragment() {
         _binding = FragmentPublishBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+
         publishViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+
         })
         return root
     }
