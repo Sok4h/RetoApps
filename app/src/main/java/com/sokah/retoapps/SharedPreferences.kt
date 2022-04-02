@@ -21,7 +21,6 @@ class SharedPreferences(val context: Context) {
     fun getLoggedUser(): User? {
 
         userCode = db.getString(loggedUser,"").toString()
-        Log.e("xd", db.getString(loggedUser,"").toString() )
 
         if(userCode != null){
             val userString = db.getString(userCode,"")
@@ -35,8 +34,8 @@ class SharedPreferences(val context: Context) {
 
         if(db.getString("USER_1","").toString().isEmpty()||db.getString("USER_2","").toString().isEmpty()){
 
-            val user = User("Pepito Perez","xd")
-            val user2 = User("Sokah","xd")
+            val user = User("Pepito Perez","")
+            val user2 = User("Sokah","")
             val userString = gson.toJson(user)
             val userString2 = gson.toJson(user2)
             db.edit().putString("USER_1", userString).apply()
@@ -44,6 +43,11 @@ class SharedPreferences(val context: Context) {
         }
         else return
 
+    }
+    fun updateUser(user:User){
+
+        val userString = gson.toJson(user)
+        db.edit().putString(userCode,userString).apply()
     }
 
     fun logOut(){

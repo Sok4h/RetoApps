@@ -3,11 +3,28 @@ package com.sokah.retoapps.ui.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sokah.retoapps.RetoAppsAplication
+import com.sokah.retoapps.User
 
 class ProfileViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    private var user_ = MutableLiveData<User>()
+
+    var user :LiveData<User> = user_
+    init {
+
+        getUser()
     }
-    val text: LiveData<String> = _text
+
+    private fun getUser() {
+
+        user_.postValue(RetoAppsAplication.prefs.getLoggedUser())
+    }
+
+    fun updateUser(loggedUser: User) {
+
+        RetoAppsAplication.prefs.updateUser(loggedUser)
+    }
+
+
 }
