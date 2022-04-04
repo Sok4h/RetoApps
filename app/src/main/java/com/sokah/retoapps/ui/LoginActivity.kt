@@ -62,6 +62,9 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
 
+        }else{
+
+            Toast.makeText(this,"Credenciales incorrectas",Toast.LENGTH_SHORT).show()
         }
 
     }

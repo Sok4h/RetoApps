@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.sokah.retoapps.RetoAppsAplication
 import com.sokah.retoapps.databinding.PostCardBinding
 import com.sokah.retoapps.model.Post
 import java.time.Month
@@ -23,7 +24,12 @@ class PostViewHolder(view : View) :RecyclerView.ViewHolder(view) {
         val month = monthh.getDisplayName(TextStyle.SHORT, Locale.getDefault())
         val year = post.date.get(Calendar.YEAR).toString()
         val bitmap = BitmapFactory.decodeFile(post.img)
+
+        var user = RetoAppsAplication.prefs.getUserById(post.userId)
+
         binding.tvPost.text=post.postMessage
+        binding.tvPostName.text=user.name
+        binding.imgProfilePost.setImageBitmap(BitmapFactory.decodeFile(user.picture))
         binding.imgPostCard.setImageBitmap(bitmap)
         binding.tvCityPost.text=post.city
         binding.tvPostDate.text = day +" " + " "+month+" " +year

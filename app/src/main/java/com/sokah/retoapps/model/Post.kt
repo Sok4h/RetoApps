@@ -4,7 +4,7 @@ import java.util.*
 
 data class Post(
 
-    var userId :UUID,
+    var userId :String,
     var postMessage :String,
     var city :String,
     var date: Calendar,

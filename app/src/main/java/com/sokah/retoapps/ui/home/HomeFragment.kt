@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
 
         binding.rvPost.adapter=adapter
         binding.rvPost.layoutManager=LinearLayoutManager(context)
-
+        binding.rvPost.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
         homeViewModel.getPostList()
 
         homeViewModel.postList.observe(viewLifecycleOwner) {
