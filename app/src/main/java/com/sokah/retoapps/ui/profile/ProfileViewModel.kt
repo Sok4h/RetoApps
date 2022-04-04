@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sokah.retoapps.RetoAppsAplication
-import com.sokah.retoapps.User
+import com.sokah.retoapps.model.User
 
 class ProfileViewModel : ViewModel() {
 

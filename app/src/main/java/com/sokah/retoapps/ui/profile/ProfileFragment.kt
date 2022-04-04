@@ -2,6 +2,7 @@ package com.sokah.retoapps.ui.profile
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -20,11 +21,10 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.sokah.retoapps.LoginActivity
+import com.sokah.retoapps.ui.LoginActivity
 import com.sokah.retoapps.R
 import com.sokah.retoapps.RetoAppsAplication.Companion.prefs
-import com.sokah.retoapps.User
-import com.sokah.retoapps.UtilDomi
+import com.sokah.retoapps.model.User
 import com.sokah.retoapps.databinding.FragmentProfileBinding
 import java.io.File
 import java.text.SimpleDateFormat
@@ -35,10 +35,11 @@ class ProfileFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
     private var file: File? = null
-    lateinit var imgPath: String
+    private var imgPath: String? = null
     var loggedUser: User? = null
     var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
     var FILE_NAME = "photo_" + timestamp + "_"
+    lateinit var dialog: BottomSheetDialog
 
     val launcher = registerForActivityResult(StartActivityForResult(), ::onCameraResult)
 
@@ -63,7 +64,7 @@ class ProfileFragment : Fragment() {
             binding.editTextTextPersonName.setText(it.name)
 
 
-            if(!it.picture.isEmpty()){
+            if (!it.picture.isEmpty()) {
                 Log.e("TAG", it.picture)
                 var bitmap = BitmapFactory.decodeFile(it.picture)
 
@@ -76,8 +77,6 @@ class ProfileFragment : Fragment() {
                     )
                 binding.imgProfile.setImageBitmap(thumbnail)
             }
-
-
 
 
         }
@@ -101,9 +100,7 @@ class ProfileFragment : Fragment() {
             )
         }
 
-        val root: View = binding.root
-
-        return root
+        return binding.root
     }
 
     private fun onCameraResult(result: ActivityResult) {
@@ -125,7 +122,7 @@ class ProfileFragment : Fragment() {
 
             Toast.makeText(context, "Operación cancelada", Toast.LENGTH_SHORT).show()
         }
-
+        dialog.dismiss()
     }
 
     private fun updateUser() {
@@ -135,10 +132,15 @@ class ProfileFragment : Fragment() {
             )
         ) loggedUser?.name = binding.editTextTextPersonName.text.toString()
 
-        if(imgPath.isNotEmpty() && !imgPath.contentEquals(loggedUser?.picture)) loggedUser?.picture=imgPath
+        if(!imgPath.isNullOrEmpty()&&!imgPath.contentEquals(loggedUser?.picture)){
+
+            loggedUser?.picture=imgPath!!
+        }
 
 
         profileViewModel.updateUser(loggedUser!!)
+
+        Toast.makeText(context,"Datos actualizados",Toast.LENGTH_SHORT).show()
 
     }
 
@@ -150,7 +152,7 @@ class ProfileFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == 1) {
-            var allowed = true;
+            var allowed = true
             for (result in grantResults) {
 
                 if (result == PackageManager.PERMISSION_DENIED) allowed = false
@@ -170,7 +172,7 @@ class ProfileFragment : Fragment() {
     private fun handleModal() {
 
         val view: View = layoutInflater.inflate(R.layout.bottomsheet, null)
-        val dialog = BottomSheetDialog(requireContext())
+         dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(view)
 
         val camera: ConstraintLayout = view.findViewById(R.id.clCamera)
@@ -189,7 +191,7 @@ class ProfileFragment : Fragment() {
 
     }
 
-    fun cameraHandler() {
+    private fun cameraHandler() {
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         file = File("${requireContext().getExternalFilesDir(null)}/ $FILE_NAME")
@@ -202,7 +204,7 @@ class ProfileFragment : Fragment() {
 
 
 
-    fun logOut() {
+    private fun logOut() {
 
         prefs.logOut()
         val intent = Intent(context, LoginActivity::class.java)

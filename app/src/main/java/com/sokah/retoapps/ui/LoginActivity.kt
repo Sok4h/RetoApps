@@ -1,13 +1,13 @@
-package com.sokah.retoapps
+package com.sokah.retoapps.ui
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import com.google.gson.Gson
 import com.sokah.retoapps.RetoAppsAplication.Companion.prefs
+import com.sokah.retoapps.USER1_EMAIL
+import com.sokah.retoapps.USER2_EMAIL
+import com.sokah.retoapps.USERPASS
 import com.sokah.retoapps.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/ic_baseline_collections_24.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/ic_outline_email_24.xml" value="0.3615" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/drawable/rv_divider.xml" value="0.2095" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/activity_login.xml" value="0.2767210144927536" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/activity_main.xml" value="0.28306159420289856" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/bottomsheet.xml" value="0.38697916666666665" />
@@ -13,8 +22,10 @@
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.38697916666666665" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/fragment_notifications.xml" value="0.2767210144927536" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/fragment_publish.xml" value="0.25" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/fragment_publish.xml" value="0.33" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/fragment_second.xml" value="0.2767210144927536" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/post_card.xml" value="0.33" />
+        <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/layout/post_layout.xml" value="0.25" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/menu/bottom_nav_menu.xml" value="0.38697916666666665" />
         <entry key="..\:/Proyectos_Android/RetoApps/app/src/main/res/xml/paths.xml" value="0.38697916666666665" />
       </map>

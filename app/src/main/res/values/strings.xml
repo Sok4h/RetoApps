@@ -5,5 +5,13 @@
     <string name="title_profile">Perfil</string>
     <string name="title_activity_login">Login</string>
 
+    <string-array name="cities">
 
+        <item> Cali</item>
+        <item> Pradera</item>
+        <item> Palmira</item>
+        <item> Bogotá</item>
+
+
+    </string-array>
 </resources>
