@@ -39,8 +39,8 @@ class HomeFragment : Fragment() {
 
         homeViewModel.postList.observe(viewLifecycleOwner) {
 
-            adapter.clear()
-            for (post in it) adapter.addPost(post)
+            adapter.addPosts(it)
+
         }
         return binding.root
     }

@@ -81,12 +81,14 @@ class PublishFragment : Fragment() {
 
         else{
 
-            val post = Post(publishViewModel.getUser().id,binding.etPost.text.toString(),binding.spinner.selectedItem.toString(),
+            val post = Post(UUID.randomUUID().toString(),publishViewModel.getUser().id,binding.etPost.text.toString(),binding.spinner.selectedItem.toString(),
                 Calendar.getInstance(), imgPath!!)
 
             publishViewModel.uploadPost(post)
 
             Toast.makeText(context, "Post realizado correctamente",Toast.LENGTH_SHORT).show()
+
+            clear()
         }
 
     }
@@ -174,5 +176,11 @@ class PublishFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun clear(){
+
+        binding.etPost.setText("")
+        binding.imgPost.setImageBitmap(BitmapFactory.decodeFile(""))
     }
 }

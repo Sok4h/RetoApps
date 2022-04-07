@@ -13,14 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-
+        app:endIconMode="clear_text"
         android:layout_marginEnd="32dp"
         android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_outline_email_24"
-        app:startIconTint="@color/purple_200">
+        app:startIconDrawable="@drawable/ic_outline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -35,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="Password"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="@+id/inputEmail"
         app:layout_constraintStart_toStartOf="@+id/inputEmail"
