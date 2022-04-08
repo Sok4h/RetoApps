@@ -23,6 +23,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sokah.retoapps.R
+import com.sokah.retoapps.UtilDomi
 import com.sokah.retoapps.databinding.FragmentPublishBinding
 import com.sokah.retoapps.model.Post
 import java.io.File
@@ -41,6 +42,8 @@ class PublishFragment : Fragment() {
     var FILE_NAME = "post" + timestamp + "_"
 
     val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onCameraResult)
+    val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onGalleryResult)
+
 
 
 
@@ -99,21 +102,12 @@ class PublishFragment : Fragment() {
         if (result.resultCode == Activity.RESULT_OK) {
 
             imgPath = file?.path!!
-            val imgBitmap = BitmapFactory.decodeFile(file?.path)
-            Log.e("bitmap", file?.path!!)
-            val thumbnail =
-                Bitmap.createScaledBitmap(
-                    imgBitmap,
-                    imgBitmap.width / 4,
-                    imgBitmap.height / 4,
-                    true
-                )
-            binding.imgPost.setImageBitmap(thumbnail)
+           setProfileImg(imgPath!!)
         } else if (result.resultCode == Activity.RESULT_CANCELED) {
 
             Toast.makeText(context, "Operación cancelada", Toast.LENGTH_SHORT).show()
         }
-        dialog.dismiss()
+
     }
 
     private fun handleModal() {
@@ -128,10 +122,12 @@ class PublishFragment : Fragment() {
         camera.setOnClickListener {
 
             cameraHandler()
+            dialog.dismiss()
 
         }
         gallery.setOnClickListener {
-            Toast.makeText(context, "gallery", Toast.LENGTH_SHORT).show()
+            galleryHandler()
+            dialog.dismiss()
 
         }
         dialog.show()
@@ -146,6 +142,46 @@ class PublishFragment : Fragment() {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
         launcher.launch(intent)
 
+    }
+
+    private fun galleryHandler() {
+
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type="image/*"
+        galleryLauncher.launch(intent)
+
+    }
+
+    private fun onGalleryResult(activityResult: ActivityResult) {
+
+        if(activityResult.resultCode== Activity.RESULT_OK){
+
+            val uri = activityResult.data?.data
+            Log.e("Uri", uri!!.toString())
+            imgPath= UtilDomi.getPath(requireContext(),uri)
+
+            Log.e("Path", imgPath!!)
+
+            setProfileImg(imgPath!!)
+        }
+        else{
+
+            Toast.makeText(context, "Operación cancelada", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun setProfileImg(path: String){
+
+        val imgBitmap = BitmapFactory.decodeFile(path)
+        val thumbnail =
+            Bitmap.createScaledBitmap(
+                imgBitmap,
+                imgBitmap.width,
+                imgBitmap.height ,
+                true
+            )
+        binding.imgPost.setImageBitmap(thumbnail)
     }
 
     override fun onRequestPermissionsResult(

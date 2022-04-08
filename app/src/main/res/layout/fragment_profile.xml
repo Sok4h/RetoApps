@@ -17,21 +17,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/ic_baseline_person_24" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/imgProfile"
-        app:layout_constraintStart_toStartOf="@+id/imgProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
     <Button
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Editar Perfil"
+        android:text="Actualizar Perfil"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />

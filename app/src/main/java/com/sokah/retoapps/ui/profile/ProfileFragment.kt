@@ -2,6 +2,7 @@ package com.sokah.retoapps.ui.profile
 
 import android.Manifest
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -24,6 +25,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sokah.retoapps.ui.LoginActivity
 import com.sokah.retoapps.R
 import com.sokah.retoapps.RetoAppsAplication.Companion.prefs
+import com.sokah.retoapps.UtilDomi
 import com.sokah.retoapps.model.User
 import com.sokah.retoapps.databinding.FragmentProfileBinding
 import java.io.File
@@ -42,6 +44,9 @@ class ProfileFragment : Fragment() {
     lateinit var dialog: BottomSheetDialog
 
     val launcher = registerForActivityResult(StartActivityForResult(), ::onCameraResult)
+    val galleryLauncher = registerForActivityResult(StartActivityForResult(), ::onGalleryResult)
+
+
 
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -55,7 +60,7 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-
+        Log.e("TAG", "onGalleryResult: ", )
         //actualiza perfil
         profileViewModel.user.observe(viewLifecycleOwner) {
 
@@ -105,19 +110,10 @@ class ProfileFragment : Fragment() {
 
     private fun onCameraResult(result: ActivityResult) {
 
-        if (result.resultCode == Activity.RESULT_OK) {
+        if (result.resultCode == RESULT_OK) {
 
             imgPath = file?.path!!
-            val imgBitmap = BitmapFactory.decodeFile(file?.path)
-            Log.e("bitmap", file?.path!!)
-            val thumbnail =
-                Bitmap.createScaledBitmap(
-                    imgBitmap,
-                    imgBitmap.width / 4,
-                    imgBitmap.height / 4,
-                    true
-                )
-            binding.imgProfile.setImageBitmap(thumbnail)
+            setProfileImg(imgPath!!)
         } else if (result.resultCode == Activity.RESULT_CANCELED) {
 
             Toast.makeText(context, "Operación cancelada", Toast.LENGTH_SHORT).show()
@@ -142,6 +138,24 @@ class ProfileFragment : Fragment() {
 
         Toast.makeText(context,"Datos actualizados",Toast.LENGTH_SHORT).show()
 
+    }
+
+    private fun onGalleryResult(activityResult: ActivityResult) {
+
+        if(activityResult.resultCode==RESULT_OK){
+
+            val uri = activityResult.data?.data
+            Log.e("Uri", uri!!.toString())
+            imgPath= UtilDomi.getPath(requireContext(),uri)
+
+            Log.e("Path", imgPath!!)
+
+            setProfileImg(imgPath!!)
+        }
+        else{
+
+            Toast.makeText(context, "Operación cancelada", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -169,6 +183,19 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun setProfileImg(path: String){
+
+        val imgBitmap = BitmapFactory.decodeFile(path)
+        val thumbnail =
+            Bitmap.createScaledBitmap(
+                imgBitmap,
+                imgBitmap.width / 4,
+                imgBitmap.height / 4,
+                true
+            )
+        binding.imgProfile.setImageBitmap(thumbnail)
+    }
+
     private fun handleModal() {
 
         val view: View = layoutInflater.inflate(R.layout.bottomsheet, null)
@@ -181,13 +208,24 @@ class ProfileFragment : Fragment() {
         camera.setOnClickListener {
 
             cameraHandler()
+            dialog.dismiss()
 
         }
         gallery.setOnClickListener {
-            Toast.makeText(context, "gallery", Toast.LENGTH_SHORT).show()
+
+            galleryHandler()
+            dialog.dismiss()
 
         }
         dialog.show()
+
+    }
+
+    private fun galleryHandler() {
+
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type="image/*"
+        galleryLauncher.launch(intent)
 
     }
 
