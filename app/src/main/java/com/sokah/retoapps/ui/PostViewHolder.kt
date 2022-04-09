@@ -32,7 +32,7 @@ class PostViewHolder(view : View) :RecyclerView.ViewHolder(view) {
         binding.imgProfilePost.setImageBitmap(BitmapFactory.decodeFile(user.picture))
         binding.imgPostCard.setImageBitmap(bitmap)
         binding.tvCityPost.text=post.city
-        binding.tvPostDate.text = day +" " + " "+month+" " +year
+        binding.tvPostDate.text = day  + " "+month+" " +year
 
 
     }
